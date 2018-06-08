@@ -42,7 +42,8 @@ TopicModel = R6::R6Class(
       if (is.null(private$doc_topic_matrix))
         stop("TopicModel model was not fitted yet!")
       else
-        res = normalize(private$doc_topic_matrix, "l1")
+        #res = normalize(private$doc_topic_matrix, "l1")
+        res = private$doc_topic_matrix
 
       attributes(res) = attributes(private$doc_topic_matrix)
       res
@@ -323,7 +324,8 @@ LatentDirichletAllocation = R6::R6Class(
       # update private field - only done in fit_transform()
       if(set_doc_topic_matrix) private$doc_topic_matrix = doc_topic_matrix
 
-      doc_topic_distr = text2vec::normalize(doc_topic_matrix, "l1")
+      #doc_topic_distr = text2vec::normalize(doc_topic_matrix, "l1")
+      doc_topic_distr = text2vec::doc_topic_matrix
       attributes(doc_topic_distr) = attributes(doc_topic_matrix)
       rm(doc_topic_matrix)
       attr(doc_topic_distr, "likelihood") = loglik_trace

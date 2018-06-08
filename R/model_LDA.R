@@ -30,11 +30,13 @@ TopicModel = R6::R6Class(
     n_iter_inference = NULL,
 
     topic_word_distribution_with_prior = function() {
-      normalize((self$components + private$n_iter_inference * private$topic_word_prior), "l1")
+      #normalize((self$components + private$n_iter_inference * private$topic_word_prior), "l1")
+      self$components + private$n_iter_inference * private$topic_word_prior    
     },
     doc_topic_distribution_with_prior = function() {
       if (is.null(private$doc_topic_matrix)) stop("LDA model was not fitted yet!")
-      normalize((private$doc_topic_matrix + private$n_iter_inference * private$doc_topic_prior), "l1")
+      #normalize((private$doc_topic_matrix + private$n_iter_inference * private$doc_topic_prior), "l1")
+      private$doc_topic_matrix + private$n_iter_inference * private$doc_topic_prior
     },
     doc_topic_distribution = function() {
       res = NULL
@@ -100,7 +102,8 @@ TopicModel = R6::R6Class(
     topic_word_distribution = function(value) {
       if (!missing(value)) stop("Sorry this is a read-only field")
       # self$components is topic word count
-      else normalize(self$components, "l1")
+      else #normalize(self$components, "l1")
+      self$components  
     }
   )
 )

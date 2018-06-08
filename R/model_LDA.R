@@ -349,8 +349,8 @@ LatentDirichletAllocation = R6::R6Class(
       # random topic assignements for each word
       nnz = sum(x@x)
       # -1L because topics enumerated from 0 in c++ side
-      z_old = sample.int(n = private$n_topics, size = nnz, replace = TRUE) - 1L
-      z_new = sample.int(n = private$n_topics, size = nnz, replace = TRUE) - 1L
+      z_old = sample.int(n = private$n_topics, size = nnz, replace = TRUE) #- 1L
+      z_new = sample.int(n = private$n_topics, size = nnz, replace = TRUE) #- 1L
       warplda_init_dtm(ptr, x, z_old, z_new, private$seeds)
     },
     #---------------------------------------------------------------------------------------------
